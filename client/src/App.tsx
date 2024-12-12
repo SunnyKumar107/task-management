@@ -5,14 +5,13 @@ import {
   Popconfirm,
   notification,
   Tag,
-  Badge,
   Modal,
   Form,
   Input,
   Select,
   DatePicker
 } from 'antd'
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons'
 import { getTasks, deleteTask, updateTask, addTask } from './api/tasks'
 import { Task } from './types/Task'
 import dayjs from 'dayjs'
@@ -142,7 +141,14 @@ const App: React.FC = () => {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      render: (text: string) => <span className='font-medium'>{text}</span>
+      render: (text, completed) => (
+        <span className='flex items-center space-x-2'>
+          <span className='font-semibold'>{text}</span>
+          {completed && (
+            <CheckOutlined className='text-xl font-bold text-green-600' />
+          )}
+        </span>
+      )
     },
     {
       title: 'Priority',
@@ -163,17 +169,6 @@ const App: React.FC = () => {
           {dayjs(dueDate).format('DD MMM YYYY')}
         </span>
       )
-    },
-    {
-      title: 'Status',
-      dataIndex: 'completed',
-      key: 'completed',
-      render: (completed: boolean) =>
-        completed ? (
-          <Badge status='success' text='Completed' />
-        ) : (
-          <Badge status='error' text='Not Completed' />
-        )
     },
     {
       title: 'Actions',
@@ -199,7 +194,7 @@ const App: React.FC = () => {
   ]
 
   return (
-    <div className='p-4 bg-white rounded-lg shadow'>
+    <div className='bg-gray-50 h-screen'>
       <Header onSetIsCreateModalVisible={setIsCreateModalVisible} />
 
       <Table
@@ -208,7 +203,6 @@ const App: React.FC = () => {
         loading={loading}
         rowKey='id'
         pagination={{ pageSize: 5 }}
-        bordered
       />
 
       <Modal
