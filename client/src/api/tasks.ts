@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Task } from '../types/Task'
 
-const API_URL = 'http://localhost:3000'
+const API_URL = 'https://task-management-mkrq.onrender.com'
 
 export const getTasks = async () => axios.get<Task[]>(`${API_URL}/tasks`)
 
