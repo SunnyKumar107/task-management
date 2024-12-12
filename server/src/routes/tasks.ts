@@ -7,16 +7,9 @@ const router = Router()
 let tasks: Task[] = [
   {
     id: uuidv4(),
-    title: 'Task 1',
+    title: 'Scizers Assignment',
     priority: 'High',
-    dueDate: '2024-06-30',
-    completed: false
-  },
-  {
-    id: uuidv4(),
-    title: 'Task 2',
-    priority: 'Medium',
-    dueDate: '2024-07-05',
+    dueDate: '2024-12-112',
     completed: true
   }
 ]
