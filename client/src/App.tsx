@@ -9,7 +9,8 @@ import {
   Form,
   Input,
   Select,
-  DatePicker
+  DatePicker,
+  Switch
 } from 'antd'
 import { DeleteOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons'
 import { getTasks, deleteTask, updateTask, addTask } from './api/tasks'
@@ -141,10 +142,10 @@ const App: React.FC = () => {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
-      render: (text, completed) => (
+      render: (text, task) => (
         <span className='flex items-center space-x-2'>
           <span className='font-semibold'>{text}</span>
-          {completed && (
+          {task.completed && (
             <CheckOutlined className='text-xl font-bold text-green-600' />
           )}
         </span>
@@ -227,6 +228,12 @@ const App: React.FC = () => {
               <Option value='Medium'>Medium</Option>
               <Option value='Low'>Low</Option>
             </Select>
+          </Form.Item>
+          <Form.Item name='completed' label='Status' valuePropName='checked'>
+            <Switch
+              checkedChildren='Completed'
+              unCheckedChildren='Not Completed'
+            />
           </Form.Item>
           <Form.Item
             name='dueDate'
